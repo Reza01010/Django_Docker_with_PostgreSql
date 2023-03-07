@@ -33,14 +33,14 @@ class TestAcconts(TestCase):
         self.assertContains(response, 'signup')
         response = self.client.get(reverse('signup'))
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'registration/signup.html')
+        self.assertTemplateUsed(response, 'account/signup.html')
         response = self.client.post(reverse('signup'), data={
             'email': 'th85g4jt6347@gmail.com',
             'username': 'nina',
             'password1': 'j54y9yH797gt6r5d',
             'password2': 'j54y9yH797gt6r5d',
         },follow=True)
-        self.assertTemplateUsed(response,'registration/login.html')
+        self.assertTemplateUsed(response,'account/login.html')
         self.assertContains(response, 'login')
         users = get_user_model().objects.all()
         self.assertEqual(users.count(), 2)
