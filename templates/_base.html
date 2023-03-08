@@ -12,6 +12,12 @@
 </head>
 <body>
 
+    {% if user.is_authenticated %}
+        <span>Hello {{ user.userimail }}</span> --- | --- <a href="{% url 'account_logout' %}">log out</a>
+    {% else %}
+        <a href="{% url 'account_login' %}">log in</a> ___ | ___ <a href="{% url 'account_signup' %}">sign up</a>
+    {% endif %}
+
 
     <div class="row py-3">
         <div class="col-md-8 col-md-10 mx-auto">

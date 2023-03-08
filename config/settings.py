@@ -50,8 +50,9 @@ INSTALLED_APPS = [
     'allauth.account',
 
     #local apps
-    'acconts',
-    'pages',
+    'acconts.apps.AccontsConfig',
+    'pages.apps.PagesConfig',
+    'products.apps.ProductsConfig'
 ]
 
 SITE_ID = 1

@@ -1,0 +1,17 @@
+{% extends '_base.html' %}
+{% block content %}
+<p>Product detail</p>
+    <hr><hr><hr>
+<br><br>
+    <p>title :</p><br><h3>{{ product.title}}</h3>
+<br><br>
+    <p>price :</p><br><h3>{{ product.price}}</h3>
+<hr><br>
+    <p>description :</p><br><h3>{{ product.description}}</h3>
+<hr><br>
+    <p>created :</p><br><h3>{{ product.datetime_created}}</h3>
+<hr><br>
+    <p>moified :</p><br><h3>{{ product.datetime_moified}}</h3>
+<hr><br>
+
+{% endblock content %}
