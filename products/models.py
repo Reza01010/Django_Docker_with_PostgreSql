@@ -35,8 +35,8 @@ class Comment(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='comments',)
     author = models.ForeignKey(get_user_model(), on_delete=models.CASCADE,
                                related_name='comments', verbose_name='comment author')
-    body = models.TextField(verbose_name='text :')
-    starts = models.CharField(max_length=10, choices=PRODUCT_STARS, verbose_name='star :')
+    body = models.TextField(verbose_name='body')
+    starts = models.CharField(max_length=10, choices=PRODUCT_STARS, )
 
     datetime_created = models.DateTimeField(auto_now_add=True)
     datetime_moified = models.DateTimeField(auto_now=True)
