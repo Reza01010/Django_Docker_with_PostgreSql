@@ -12,7 +12,8 @@ class CommentsInline(admin.StackedInline):
 # admin.site.register(Product)
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ['title', 'price', 'datetime_created', 'active',]
+    list_display = ['title', 'price',
+                    'datetime_created', 'active',]
 
     inlines = [
         CommentsInline,
@@ -21,6 +22,7 @@ class ProductAdmin(admin.ModelAdmin):
 
 # admin.site.register(Comment)
 @admin.register(Comment)
-class ProductAdmin(admin.ModelAdmin):
-    list_display = ['author', 'product','datetime_created', 'active', 'body', 'starts']
+class CommentAdmin(admin.ModelAdmin):
+    list_display = ['author', 'product','datetime_created',
+                    'active', 'body', 'starts']
 
