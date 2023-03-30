@@ -7,6 +7,7 @@ from django.contrib import messages
 
 from .models import (Product, Comment)
 from .forms import CommentForms
+from cart.forms import AddToCartProductForm
 
 
 def test_translation(request):
@@ -33,6 +34,7 @@ class ProductDetailView(generic.DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['comment_form'] = CommentForms()
+        # context['add_to_cart_form'] = AddToCartProductForm()
         return context
 
 
@@ -48,7 +50,7 @@ class CommentCreateView(generic.CreateView):
         pk = int(self.kwargs['pk'])
         product = get_object_or_404(Product, id=pk)
         obj.product = product
-
+        messages.success(self.request, _('Comment successfully created'))
         return super().form_valid(form)
 
     # def get_success_url(self):
