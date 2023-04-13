@@ -2,23 +2,26 @@ from django.db import models
 from django.shortcuts import reverse
 from django.contrib.auth import get_user_model
 from django.utils.translation import gettext_lazy as _
+from django.utils import timezone
+from ckeditor.fields import RichTextField
 
 
 class Product(models.Model):
-    title = models.CharField(max_length=100)
-    description = models.TextField()
+    title = models.CharField(_('title'), max_length=100)
+    description = RichTextField(_('descript'))
+    short_description = models.TextField(_('short_descript'), blank=True)
     price = models.PositiveIntegerField()
     active = models.BooleanField(default=True)
-    image = models.ImageField(verbose_name=_('product Image'), upload_to='product/product_cover', blank=True)
+    image = models.ImageField(_('product Image'), upload_to='product/product_cover', blank=True)
 
-    datetime_created = models.DateTimeField(auto_now_add=True)
+    datetime_created = models.DateTimeField(_('datetime_created'), default=timezone.now)
     datetime_moified = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.title
 
     def get_absolute_url(self):
-        return reverse('product_detail', args=[self.pk])
+        return reverse('product:product_detail', args=[self.pk])
 
 
 class ActiveCommentManager(models.Manager):

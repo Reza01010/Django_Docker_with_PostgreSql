@@ -42,7 +42,7 @@
                                 <div class="site-branding" style="margin-right: 30px;">
                                     <a href="index.html" class="logo">
                                         <figure class="logo--normal d-none d-sm-block">
-                                            <img class="px-5" src="assets/img/codingyar_logo.png" style="max-height: 50px; margin-bottom: -15px;" alt="Logo">
+                                            <img class="px-5" src="{% static 'img/codingyar_logo.png' %}" style="max-height: 50px; margin-bottom: -15px;" alt="Logo">
                                         </figure>
                                     </a>
                                 </div>
@@ -54,7 +54,7 @@
                                             </a>
                                         </li>
                                         <li class="mainmenu__item menu-item-has-children">
-                                            <a href="{% url 'product_list' %}" class="mainmenu__link">
+                                            <a href="{% url 'product:product_list' %}" class="mainmenu__link">
                                                 <span class="mm-text">وبلاگ</span>
                                             </a>
                                         </li>
@@ -165,9 +165,10 @@
 {% endblock content %}
 
 
-</div>
-</div>
 
+</div>
+</div>
+{% include 'footer.html' %}
     <!-- Main Wrapper End -->
 <!-- Optional JavaScript; choose one of the two! -->
 

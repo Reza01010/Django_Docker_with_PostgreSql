@@ -4,6 +4,9 @@
 {% load comment_tags %}
 {% load i18n %}
 {% block content %}
+{% load jalali_tags %}
+{% load humanize %}
+
     <!-- Main Wrapper Start -->
     <div class="wrapper">
         {% trans 'detail' as d %}
@@ -31,10 +34,10 @@
                             <div class="product-summary pl-lg--30 pl-md--0 text-right p-4">
                                 <h3 class="product-title mb--20">{{ product.title }}</h3>
                                 <p class="product-short-description mb--20">
-                                    {{ product.description|truncatewords:6 }} ...
+                                    {{ product.short_description|truncatechars:100   }} ...
                                 </p>
                                 <div class="my-5 py-5 product-price-wrapper mb--25">
-                                    <span class="money text-success">{% translate '$' %}{{ product.price }}</span>
+                                    <span class="money text-success">{% translate '$' %}{{ product.price|intcomma:False|trans_number }}</span>
                                     <span class="price-separator">-</span>
                                     <span class="money old-price text-danger">۲۱۰,۰۰۰ {% translate '$' %}</span>
                                 </div>
@@ -93,7 +96,8 @@
                                     <div class="tab-pane fade show active" id="nav-description" role="tabpanel"
                                          aria-labelledby="nav-description-tab">
                                         <div class="product-description text-justify">
-                                            <p>{{ product.description }}
+                                            <p>{{ product.description|safe|escape }}
+{#                                            {{ product.description|safe|escape:'href' }}#}
                                         </div>
                                     </div>
                                     <div class="tab-pane text-right" id="nav-info" role="tabpanel"
@@ -138,7 +142,7 @@
                                                                         <div class="review__meta">
                                                                             <strong class="review__author px-4">{{ comment.author.username }}</strong>
                                                                             <span class="review__dash">-</span>
-                                                                            <span class="review__published-date">{{ comment.datetime_created }}</span>
+                                                                            <span class="review__published-date">{{ comment.datetime_created|to_jalali:'%y/%m/%d_%H:%M:%S'|trans_number }}</span>
                                                                         </div>
                                                                         <div class="product-rating">
                                                                             <div class="m-0 star-rating star-five">
@@ -227,7 +231,7 @@
                                                         {#                                                        </form>#}
                                                         {#                                                    </div>#}
                                                         {% if user.is_authenticated %}
-                                                        <form method="post" action="{% url 'product_comment' product.id %}">
+                                                        <form method="post" action="{% url 'product:product_comment' product.id %}">
                                                             {% csrf_token %}
                                                             {{ comment_form|crispy }}
                                                             <input type="submit" value="{% translate 'Submit' %}">
@@ -250,33 +254,7 @@
         </div>
         <!-- Main Content Wrapper End -->
 
-        <!-- Footer Start-->
-        <footer class="footer">
-            <div class="footer-top bg-color ptb--50" data-bg-color="#f6f6f6">
-                <div class="container">
-                    <div class="row justify-content-center">
-                        <div class="col-lg-9 text-center">
-                            <div class="footer-widget mb--50">
-                                <div class="textwidget">
-                                    <img src="assets/img/codingyar_logo.png" alt="Logo">
-                                </div>
-                            </div>
-                            <div class="footer-widget mb--50 pb--1">
-                                <ul class="footer-menu">
-                                    <li><a href="">درباره ما</a></li>
-                                    <li><a href="">قوانین و مقررات</a></li>
-                                    <li><a href="">تماس با ما</a></li>
-                                </ul>
-                            </div>
-                            <div class="footer-widget">
-                                Codingyar.com © | all rights reserved
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </footer>
-        <!-- Footer End-->
+
 
         <!-- Search form Popup Start -->
         <div class="searchform__popup" id="searchForm">
