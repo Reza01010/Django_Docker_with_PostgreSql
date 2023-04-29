@@ -55,12 +55,14 @@ INSTALLED_APPS = [
     'rosetta',
     'ckeditor',
 
+
     #local apps
     'acconts.apps.AccontsConfig',
     'pages.apps.PagesConfig',
     'products.apps.ProductsConfig',
     'cart.apps.CartConfig',
     'orders.apps.OrdersConfig',
+    'payment.apps.PaymentConfig'
 ]
 
 SITE_ID = 1
@@ -209,3 +211,6 @@ ACCOUNT_UNIQUE_EMAIL = True
 MESSAGE_TAGS = {
     message_constants.ERROR: 'danger',
 }
+
+
+ZARINPAL_MERCHANT_ID = env('DJANGO_ZARINPAL_MERCHANT_ID')
