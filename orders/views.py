@@ -41,7 +41,7 @@ def order_create_view(request):
 
             request.session['order_id'] = order_obj.id
             # messages.success(request, _('your order has successfully pleased.'))
-            return redirect('payment:payment_process')
+            return redirect('payment:payment_process_sandbox')
 
     return render(request, 'order/order_create.html', context={
         'form': order_form,
